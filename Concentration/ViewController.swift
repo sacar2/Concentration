@@ -11,8 +11,11 @@ import UIKit
 class ViewController: UIViewController {
 
     //does not get set until it is needed
-    lazy var game : Concentration = Concentration(numberOfPairsOfCards: (cardButtons.count+1)/2)
+    lazy var game : Concentration = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
 
+    var numberOfPairsOfCards: Int{
+        return (cardButtons.count+1)/2
+    }
     @IBOutlet weak var scoreLabel: UILabel!
     
     var score = 0 {
