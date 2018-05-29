@@ -14,13 +14,13 @@ struct Card{
     var identifier: Int
     var hasBeenSeen = false
     
-    static var identifierFactory: Int = 0
+    private static var identifierFactory: Int = 0
     
     static func resetIdentifierFactory() {
         identifierFactory = 0
     }
     
-    static func getUniqueIdentifier() -> Int{
+    private static func getUniqueIdentifier() -> Int{
         identifierFactory += 1
         return identifierFactory
     }

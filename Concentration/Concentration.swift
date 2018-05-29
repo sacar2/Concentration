@@ -10,9 +10,9 @@ import Foundation
 
 class Concentration
 {
-    var cards = [Card]()
+    private(set) var cards = [Card]()
     
-    var indexOfOneAndOnlyFaceUpCard : Int?{
+    private var indexOfOneAndOnlyFaceUpCard : Int?{
         get{
             var foundIndex: Int?
             //go through all the cards
@@ -76,13 +76,14 @@ class Concentration
         }
     }
     
-    func hideAllCardEmojis(){
+    private func hideAllCardEmojis(){
         for index in cards.indices{
             if cards[index].isFacedUp {
                 cards[index].isFacedUp = false
             }
         }
     }
+    
     //initializes a randomized set of cards
     init(numberOfPairsOfCards: Int){
         Card.resetIdentifierFactory()
