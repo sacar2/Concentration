@@ -42,6 +42,7 @@ class Concentration
     var flipcount = 0
     
     func ChooseCard(at index : Int){
+        assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index): chosen index not in the cards")
         //current card is not in a match
         if !cards[index].isMatched{
             //one card is already faced up and second selected card is not itself
@@ -86,6 +87,7 @@ class Concentration
     
     //initializes a randomized set of cards
     init(numberOfPairsOfCards: Int){
+        assert(numberOfPairsOfCards>0, "Concentration.init(\(numberOfPairsOfCards)): must have at least one pair of cards")
         Card.resetIdentifierFactory()
         hideAllCardEmojis()
         for _ in 0..<numberOfPairsOfCards{

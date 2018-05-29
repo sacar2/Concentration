@@ -52,10 +52,10 @@ class ViewController: UIViewController {
     //A dictionary for the cards, linking the view(emojis) to the data model(Cards which have an identifier, matched bool value, and faced up bool value
     private var emoji = Dictionary<Int,String>()
     
-    private lazy var emojiChoices = emojiThemes[Int(arc4random_uniform(UInt32(emojiThemes.count)))]
+    private lazy var emojiChoices = emojiThemes[emojiThemes.count.arc4random]
     
     private func resetEmojiChoices(){
-        emojiChoices = emojiThemes[Int(arc4random_uniform(UInt32(emojiThemes.count)))]
+        emojiChoices = emojiThemes[emojiThemes.count.arc4random]
         emoji = Dictionary<Int,String>()
     }
     
@@ -112,8 +112,7 @@ class ViewController: UIViewController {
     //selects an emoji from the choices of emojis to set the cards to
     private func emoji(for card: Card) -> String{
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count-1))+1)
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+            emoji[card.identifier] = emojiChoices.remove(at: (emojiChoices.count-1).arc4random+1)
         }
         return emoji[card.identifier] ?? "?"
     }
@@ -124,3 +123,15 @@ class ViewController: UIViewController {
     }
 }
 
+
+extension Int{
+    var arc4random: Int{
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        }else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self))))
+        }else{
+            return 0
+        }
+    }
+}
